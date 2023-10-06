@@ -1,15 +1,16 @@
 import express, { Request, Response, NextFunction } from "express"
-import fs from "fs"
-import util from "util"
 import fileUpload from "express-fileupload"
 
 import { inference } from "./inference.mts"
+import { initFolders } from "./initFolders.mts"
 
 declare module 'express-serve-static-core' {
   interface Request {
     files: any;
   }
 }
+
+initFolders()
 
 const app = express()
 const port = 7860

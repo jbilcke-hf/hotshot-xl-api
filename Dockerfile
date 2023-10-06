@@ -62,12 +62,13 @@ RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 
 WORKDIR $HOME/app/Hotshot-XL
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=user . $HOME/app/Hotshot-XL
+
+RUN pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
 
 COPY --chown=user . $HOME/app/Hotshot-XL
 
-# Set the working directory to the user's home directory
+# Set the working directory back to the user's home directory
 WORKDIR $HOME/app
 
 RUN echo "Build ended at: $(date "+%Y-%m-%d %H:%M")"

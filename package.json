@@ -1,10 +1,12 @@
 {
   "name": "@jbilcke-hf/hotshot-xl-api",
   "version": "1.0.0",
-  "description": "API t generate videos from a custom SDXL LoRA",
+  "description": "Generate a gif from a custom SDXL LoRA",
   "main": "src/index.mts",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.mts",
+    "start": "npm run dl:model && npm run exec:index",
+    "exec:index": "node --loader ts-node/esm src/index.mts",
+    "dl:model": "bash download-model.sh",
     "docker": "npm run docker:build && npm run docker:run",
     "docker:build": "docker build -t hotshot-xl-api .",
     "docker:run": "docker run -it -p 7860:7860 hotshot-xl-api"

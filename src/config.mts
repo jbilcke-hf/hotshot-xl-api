@@ -2,8 +2,8 @@ import path from "node:path"
 
 export const storagePath = `${process.env.STORAGE_PATH || './sandbox'}`
 
-export const inputsDirFilePath = path.join(storagePath, "training_inputs")
-export const outputsDirFilePath = path.join(storagePath, "training_outputs")
+export const lorasDirFilePath = path.join(storagePath, "loras")
+export const modelsDirFilePath = path.join(storagePath, "models")
 
-export const shotFormatVersion = 1
-export const sequenceFormatVersion = 1
+export const baseSDXLDir = path.join(modelsDirFilePath, "stable-diffusion-xl-base-1.0")
+export const spatialUnetBaseGlobalVar = path.join(baseSDXLDir, "unet")
