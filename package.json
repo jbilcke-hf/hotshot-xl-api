@@ -1,0 +1,26 @@
+{
+  "name": "@jbilcke-hf/hotshot-xl-api",
+  "version": "1.0.0",
+  "description": "API t generate videos from a custom SDXL LoRA",
+  "main": "src/index.mts",
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.mts",
+    "docker": "npm run docker:build && npm run docker:run",
+    "docker:build": "docker build -t hotshot-xl-api .",
+    "docker:run": "docker run -it -p 7860:7860 hotshot-xl-api"
+  },
+  "author": "Julian Bilcke <julian.bilcke@huggingface.co>",
+  "license": "Apache License",
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/uuid": "^9.0.2",
+    "axios": "^1.5.1",
+    "eventsource-parser": "^1.0.0",
+    "express": "^4.18.2",
+    "fs-extra": "^11.1.1",
+    "temp-dir": "^3.0.0",
+    "tmp-promise": "^3.0.3",
+    "ts-node": "^10.9.1",
+    "uuid": "^9.0.0"
+  }
+}
