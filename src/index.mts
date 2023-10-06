@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from "express"
-import fileUpload from "express-fileupload"
 
 import { inference } from "./inference.mts"
 import { initFolders } from "./initFolders.mts"
@@ -15,9 +14,9 @@ initFolders()
 const app = express()
 const port = 7860
 
-app.use(express.json({limit: '50mb'}))
-app.use(express.urlencoded({limit: '50mb', extended: true}))
-app.use(fileUpload())
+// note that use a small limit here
+app.use(express.json({limit: '1mb'}))
+app.use(express.urlencoded({limit: '1mb', extended: true}))
 
 app.post("/", async (req: Request, res: Response, _next: NextFunction) => {
 
