@@ -2,6 +2,9 @@
 modelsDir="/data/models"
 modelName="stable-diffusion-xl-base-1.0"
 
+echo "sanity check: listing for files and folders in the current working dir"
+ls -la
+
 mkdir -p $modelsDir
 cd $modelsDir
 
