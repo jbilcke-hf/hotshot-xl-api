@@ -17,8 +17,7 @@ export async function inference(params: { prompt: string, lora: string }) {
   const output = await file({ postfix: ".gif" })
 
   const cmd = `
-    cd Hotshot-XL &&
-    python3 inference.py \
+    python3 ./Hotshot-XL/inference.py \
     --prompt="${params.prompt}" \
     --output="${output.path}" \
     --spatial_unet_base="${spatialUnetBaseGlobalVar}" \

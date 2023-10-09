@@ -7,3 +7,11 @@ export const modelsDirFilePath = path.join(storagePath, "models")
 
 export const baseSDXLDir = path.join(modelsDirFilePath, "stable-diffusion-xl-base-1.0")
 export const spatialUnetBaseGlobalVar = path.join(baseSDXLDir, "unet")
+
+console.log("PATHS: " + JSON.stringify({
+  storagePath,
+  lorasDirFilePath,
+  modelsDirFilePath,
+  baseSDXLDir,
+  spatialUnetBaseGlobalVar
+}, null, 2))
