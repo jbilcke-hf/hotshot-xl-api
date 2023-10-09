@@ -18,7 +18,7 @@ export async function inference(params: { prompt: string, lora: string }) {
 
   const cmd = `
     cd Hotshot-XL &&
-    python inference.py \
+    python3 inference.py \
     --prompt="${params.prompt}" \
     --output="${output.path}" \
     --spatial_unet_base="${spatialUnetBaseGlobalVar}" \
