@@ -16,7 +16,7 @@ cd $modelsDir
 if [ ! -d "$modelsDir/$sdxlModelName" ]
 then
     # make sure we have LFS capability
-    git lfs install
+    # git lfs install
 
     # clone the repo (note: it is huge)
     # git clone https://huggingface.co/stabilityai/$modelName
@@ -31,17 +31,18 @@ else
     echo "$modelsDir/$sdxlModelName already exists"
 fi
 
-if [ ! -d "$modelsDir/hotshotco" ]
-then
-    # make sure we have LFS capability
-    git lfs install
-
-    mkdir -p hotshotco
-    cd hotshotco
-    git clone https://huggingface.co/hotshotco/Hotshot-XL
-    cd ..
-else
-    echo "$modelsDir/$hotshotco already exists"
-fi
+# we don't need to downlaod this as this is already in the Dockerfile
+# if [ ! -d "$modelsDir/hotshotco" ]
+# then
+#     # make sure we have LFS capability
+#     # git lfs install
+# 
+#     mkdir -p hotshotco
+#     cd hotshotco
+#     git clone https://huggingface.co/hotshotco/Hotshot-XL
+#     cd ..
+# else
+#     echo "$modelsDir/$hotshotco already exists"
+# fi
 
 cd ..
