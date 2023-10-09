@@ -53,28 +53,31 @@ WORKDIR $HOME/app
 # where available (npm@5+)
 COPY --chown=user package*.json $HOME/app
 
+# Install node dependencies
 RUN npm install
 
-COPY --chown=user . $HOME/app
-
-# Download Hotshot XL and the weights
-RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
+# Download the Hotshot-XL source code (from GitHub)
+RUN git clone https://github.com/hotshotco/Hotshot-XL.git
 
 WORKDIR $HOME/app/Hotshot-XL
 
-COPY --chown=user . $HOME/app/Hotshot-XL
+# Download the Hotshot-XL model weights (from Hugging Face)
+RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 
+# copy the list of dependencies
+COPY --chown=user requirements.txt $HOME/app/Hotshot-XL/requirements.txt
+
+# Install the source code dependencies
 RUN pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
 
-COPY --chown=user . $HOME/app/Hotshot-XL
-
-# Set the working directory back to the user's home directory
+# Let's go back to the app working dir
 WORKDIR $HOME/app
+
+# Let's copy everything
+COPY --chown=user . $HOME/app
 
 RUN echo "Build ended at: $(date "+%Y-%m-%d %H:%M")"
 
 EXPOSE 7860
 
-# we can't use this (it time out)
-# CMD [ "xvfb-run", "-s", "-ac -screen 0 1920x1080x24", "npm", "run", "start" ]
 CMD [ "npm", "run", "start" ]
