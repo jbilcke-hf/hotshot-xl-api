@@ -62,7 +62,7 @@ RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 
 WORKDIR $HOME/app/Hotshot-XL
 
-COPY --chown=user . $HOME/app/Hotshot-XL
+# COPY --chown=user . $HOME/app/Hotshot-XL
 
 RUN pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
 

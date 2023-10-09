@@ -5,6 +5,11 @@ modelName="stable-diffusion-xl-base-1.0"
 echo "sanity check: listing for files and folders in the current working dir"
 ls -la
 
+echo "sanity check: listing for files and folders in the Hotshot-XL dir"
+cd Hotshot-XL
+ls -la
+cd ..
+
 mkdir -p $modelsDir
 cd $modelsDir
 

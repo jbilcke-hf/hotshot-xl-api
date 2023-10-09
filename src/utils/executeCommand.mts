@@ -2,6 +2,7 @@ import { exec } from "child_process"
 
 export async function executeCommand(cmd: string): Promise<string> {
   return new Promise((resolve, reject) => {
+    console.log("executing command: " + cmd)
     exec(cmd, { maxBuffer: 1024 * 500 }, (error, stdout, stderr) => {
       if (error) {
         reject(error.message)

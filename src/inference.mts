@@ -15,6 +15,15 @@ export async function inference(params: { prompt: string, lora: string }) {
   await downloadFile(params.lora, loraPath)
 
   const output = await file({ postfix: ".gif" })
+ 
+  const out1 = await executeCommand("pwd")
+  console.log("out1:", out1)
+
+  const out2 = await executeCommand("ls -a")
+   console.log("out2:", out2)
+
+  const out3 = await executeCommand("ls -a ./Hotshot-XL")
+  console.log("out3:", out3)
 
   const cmd = `
     python3 ./Hotshot-XL/inference.py \
