@@ -16,22 +16,13 @@ export async function inference(params: { prompt: string, lora: string }) {
 
   const output = await file({ postfix: ".gif" })
  
-  const out1 = await executeCommand("pwd")
-  console.log("out1:", out1)
+  console.log("\"which python3\" = ", await executeCommand("which python3"))
 
-  const out2 = await executeCommand("ls -a")
-   console.log("out2:", out2)
-
-  const out3 = await executeCommand("ls -a ./Hotshot-XL")
-  console.log("out3:", out3)
-
-  const cmd = `
-    python3 ./Hotshot-XL/inference.py \
-    --prompt="${params.prompt}" \
-    --output="${output.path}" \
-    --spatial_unet_base="${spatialUnetBaseGlobalVar}" \
-    --lora="${loraPath}"
-  `;
+  const cmd = `python3 inference.py \
+c--prompt="${params.prompt}" \
+c--output="${output.path}" \
+c--spatial_unet_base="${spatialUnetBaseGlobalVar}" \
+ --lora="${loraPath}"`;
 
   await executeCommand(cmd.trim())
 

@@ -64,11 +64,24 @@ WORKDIR $HOME/app/Hotshot-XL
 # Download the Hotshot-XL model weights (from Hugging Face)
 RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 
+# should we do this to install pytorch with cuda support?
+#ARG PYTORCH='2.0.1'
+#ARG TORCH_VISION=''
+#ARG TORCH_AUDIO=''
+#ARG CUDA='cu118'
+#RUN [ ${#PYTORCH} -gt 0 ] && VERSION='torch=='$PYTORCH'.*' ||  VERSION='torch'; python3 -m pip install --no-cache-dir -U $VERSION --extra-index-url https://download.pytorch.org/whl/$CUDA
+#RUN [ ${#TORCH_VISION} -gt 0 ] && VERSION='torchvision=='TORCH_VISION'.*' ||  VERSION='torchvision'; python3 -m pip install --no-cache-dir -U $VERSION --extra-index-url https://download.pytorch.org/whl/$CUDA
+#RUN [ ${#TORCH_AUDIO} -gt 0 ] && VERSION='torchaudio=='TORCH_AUDIO'.*' ||  VERSION='torchaudio'; python3 -m pip install --no-cache-dir -U $VERSION --extra-index-url https://download.pytorch.org/whl/$CUDA
+
 # copy the list of dependencies
-COPY --chown=user requirements.txt $HOME/app/Hotshot-XL/requirements.txt
+# COPY --chown=user requirements.txt $HOME/app/Hotshot-XL/requirements.txt
 
 # Install the source code dependencies
-RUN python3 -m pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
+# RUN python3 -m pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
+
+COPY requirements.txt ./
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # Let's go back to the app working dir
 WORKDIR $HOME/app
