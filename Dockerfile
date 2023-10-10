@@ -64,6 +64,10 @@ WORKDIR $HOME/app/Hotshot-XL
 # Download the Hotshot-XL model weights (from Hugging Face)
 RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 
+# Download the Hotshot-XL model trained on 512px
+RUN git clone https://huggingface.co/hotshotco/SDXL-512
+
+
 # should we do this to install pytorch with cuda support?
 #ARG PYTORCH='2.0.1'
 #ARG TORCH_VISION=''
