@@ -68,7 +68,7 @@ RUN git clone https://huggingface.co/hotshotco/Hotshot-XL
 COPY --chown=user requirements.txt $HOME/app/Hotshot-XL/requirements.txt
 
 # Install the source code dependencies
-RUN pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
+RUN python3 -m pip install --no-cache-dir -r $HOME/app/Hotshot-XL/requirements.txt
 
 # Let's go back to the app working dir
 WORKDIR $HOME/app
