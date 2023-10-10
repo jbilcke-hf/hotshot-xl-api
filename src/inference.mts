@@ -8,8 +8,15 @@ import { downloadFile } from "./utils/downloadFile.mts"
 import { executeCommand } from "./utils/executeCommand.mts"
 import { lorasDirFilePath, spatialUnetBaseGlobalVar } from "./config.mts"
 import { deleteFileIfExists } from "./utils/deleteFileIfExists.mts"
+import { ImageInferenceSize } from "./types.mts"
 
-export async function inference(params: { prompt: string, lora: string }) {
+export async function inference(params: {
+  prompt: string,
+  lora: string,
+  size: ImageInferenceSize
+}) {
+  const [width, height] = params.size.split('x')
+
   const loraPath = path.join(lorasDirFilePath, hashURL(params.lora) + ".safetensors")
 
   await downloadFile(params.lora, loraPath)
@@ -19,10 +26,13 @@ export async function inference(params: { prompt: string, lora: string }) {
   console.log("\"which python3\" = ", await executeCommand("which python3"))
 
   const cmd = `python3 inference.py \
-c--prompt="${params.prompt}" \
-c--output="${output.path}" \
-c--spatial_unet_base="${spatialUnetBaseGlobalVar}" \
- --lora="${loraPath}"`;
+ --prompt="${params.prompt}" \
+ --output="${output.path}" \
+ --spatial_unet_base="${spatialUnetBaseGlobalVar}" \
+ --lora="${loraPath}"
+ --width="${width}"
+ --height="${height}"
+ `;
 
   await executeCommand(cmd.trim())
 

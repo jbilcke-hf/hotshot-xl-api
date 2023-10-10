@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express"
 
 import { inference } from "./inference.mts"
 import { initFolders } from "./initFolders.mts"
+import { ImageInferenceSize } from "./types.mts"
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -20,7 +21,11 @@ app.use(express.urlencoded({limit: '1mb', extended: true}))
 
 app.post("/", async (req: Request, res: Response, _next: NextFunction) => {
 
-  const request = req.body as { prompt: string, lora: string }
+  const request = req.body as {
+    prompt: string
+    lora: string
+    size: ImageInferenceSize
+  }
 
   if (!request.prompt) {
     console.log("Invalid prompt")
@@ -38,10 +43,10 @@ app.post("/", async (req: Request, res: Response, _next: NextFunction) => {
     return
   }
 
-  const { prompt, lora } = request
+  const { prompt, lora, size } = request
 
   try {
-    const assetUrl = await inference({ prompt, lora })
+    const assetUrl = await inference({ prompt, lora, size })
     res.status(200)
     res.write(assetUrl)
     res.end()
